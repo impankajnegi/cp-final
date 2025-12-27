@@ -13,7 +13,6 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export default function SignupPage() {
   const router = useRouter();
-  const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
