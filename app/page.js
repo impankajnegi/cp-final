@@ -271,7 +271,7 @@ export default function HomePage() {
     </div>
   );
 
-  // Owner View (List Items)
+  // Owner View (List Items) - Now available to all logged-in users
   const OwnerView = () => (
     <div className="max-w-4xl mx-auto">
       <Card className="p-8 text-center">
@@ -282,30 +282,19 @@ export default function HomePage() {
         </p>
         
         {user ? (
-          user.role === 'owner' || user.role === 'admin' ? (
-            <div className="space-y-4">
-              <Link href="/owner/dashboard">
-                <Button size="lg" className="w-full md:w-auto">
-                  Go to Owner Dashboard
-                </Button>
-              </Link>
-              <Link href="/owner/add-item">
-                <Button size="lg" variant="outline" className="w-full md:w-auto ml-0 md:ml-4">
-                  <Plus className="h-5 w-5 mr-2" />
-                  Add New Item
-                </Button>
-              </Link>
-            </div>
-          ) : (
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-6">
-              <p className="text-amber-800 mb-4">
-                You're currently logged in as a {user.role}. To list items, you need an owner account.
-              </p>
-              <Button onClick={handleLogout} variant="outline">
-                Logout and Sign up as Owner
+          <div className="space-y-4">
+            <Link href="/owner/dashboard">
+              <Button size="lg" className="w-full md:w-auto">
+                Go to My Items Dashboard
               </Button>
-            </div>
-          )
+            </Link>
+            <Link href="/owner/add-item">
+              <Button size="lg" variant="outline" className="w-full md:w-auto ml-0 md:ml-4">
+                <Plus className="h-5 w-5 mr-2" />
+                Add New Item
+              </Button>
+            </Link>
+          </div>
         ) : (
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
