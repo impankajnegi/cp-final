@@ -455,7 +455,7 @@ export async function POST(request) {
 
     // Seller registration
     if (path === 'seller/register') {
-      const roleCheck = requireRole(user, ['renter', 'owner', 'seller']);
+      const roleCheck = requireRole(user, ['renter', 'seller']);
       if (roleCheck) return NextResponse.json(roleCheck, { status: roleCheck.status });
 
       const formData = await request.formData();
