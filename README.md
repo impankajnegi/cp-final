@@ -133,13 +133,13 @@ The database is automatically initialized on first API call. Tables include:
 
 ## User Flows
 
-### Owner Flow
-1. Sign up with role "owner"
-2. Login and navigate to owner dashboard
-3. Add items with images and details
-4. View and manage offers from sellers
-5. Counter or accept offers
-6. Track revenue and item status
+### Renter Flow
+1. Sign up with role "renter" (default)
+2. Browse available items or list your own items
+3. Search and filter by category, price, location
+4. View item details
+5. List your own items for rent
+6. Manage offers from sellers
 
 ### Renter Flow
 1. Sign up with role "renter"
