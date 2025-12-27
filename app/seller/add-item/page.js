@@ -20,6 +20,9 @@ export default function SellerAddItemPage() {
     description: '',
     location: '',
     expected_price: '',
+    rental_price_per_day: '',
+    rental_days_min: '1',
+    rental_days_max: '',
     age: '',
     condition: 'good',
     stock_quantity: '1'
