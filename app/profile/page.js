@@ -136,10 +136,10 @@ export default function ProfilePage() {
             </div>
 
             <div className="pt-4 space-y-3">
-              {user.role === 'owner' && (
+              {user.role === 'renter' && (
                 <Link href="/owner/dashboard">
                   <Button className="w-full" variant="outline">
-                    Go to Owner Dashboard
+                    Go to My Items Dashboard
                   </Button>
                 </Link>
               )}
@@ -157,7 +157,7 @@ export default function ProfilePage() {
                   </Button>
                 </Link>
               )}
-              {(user.role === 'renter' || user.role === 'owner') && (
+              {user.role === 'renter' && (
                 <Link href="/">
                   <Button className="w-full" variant="outline">
                     Browse Marketplace
