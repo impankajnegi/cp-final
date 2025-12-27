@@ -885,7 +885,7 @@ export async function PUT(request) {
 
       const itemId = path.split('/')[1];
       const body = await request.json();
-      const { name, category, description, location, expected_price, age, condition } = body;
+      const { name, category, description, location, expected_price, rental_price_per_day, rental_days_min, rental_days_max, age, condition } = body;
 
       const result = await pool.query(
         `UPDATE items 
@@ -894,12 +894,15 @@ export async function PUT(request) {
              description = COALESCE($3, description),
              location = COALESCE($4, location),
              expected_price = COALESCE($5, expected_price),
-             age = COALESCE($6, age),
-             condition = COALESCE($7, condition),
+             rental_price_per_day = COALESCE($6, rental_price_per_day),
+             rental_days_min = COALESCE($7, rental_days_min),
+             rental_days_max = COALESCE($8, rental_days_max),
+             age = COALESCE($9, age),
+             condition = COALESCE($10, condition),
              updated_at = CURRENT_TIMESTAMP
-         WHERE id = $8 AND owner_id = $9
+         WHERE id = $11 AND owner_id = $12
          RETURNING *`,
-        [name, category, description, location, expected_price, age, condition, itemId, user.id]
+        [name, category, description, location, expected_price, rental_price_per_day, rental_days_min, rental_days_max, age, condition, itemId, user.id]
       );
 
       if (result.rows.length === 0) {
