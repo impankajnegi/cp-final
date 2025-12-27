@@ -1,6 +1,20 @@
 // Seed script for Chaarpaisa database
-import pool from '../lib/db.js';
-import { hashPassword } from '../lib/auth.js';
+import pg from 'pg';
+import bcrypt from 'bcryptjs';
+
+const { Pool } = pg;
+
+const pool = new Pool({
+  host: 'localhost',
+  port: 5432,
+  database: 'chaarpaisa',
+  user: 'postgres',
+  password: 'postgres'
+});
+
+function hashPassword(password) {
+  return bcrypt.hashSync(password, 10);
+}
 
 async function seed() {
   console.log('Starting database seed...');
