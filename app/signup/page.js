@@ -8,10 +8,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Store, Mail, Lock, User, Phone, AlertCircle } from 'lucide-react';
+import { Store, Mail, Lock, User, Phone, AlertCircle, X } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export default function SignupPage() {
+  const router = useRouter();
   const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
