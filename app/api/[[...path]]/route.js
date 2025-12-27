@@ -234,7 +234,7 @@ export async function GET(request) {
 
     // Get single offer
     if (path.startsWith('offers/')) {
-      const roleCheck = requireRole(user, ['owner', 'seller', 'admin']);
+      const roleCheck = requireRole(user, ['renter', 'seller', 'admin']);
       if (roleCheck) return NextResponse.json(roleCheck, { status: roleCheck.status });
 
       const offerId = path.split('/')[1];
