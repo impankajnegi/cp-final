@@ -53,6 +53,51 @@ export async function GET(request) {
 
     const user = authenticate(request);
 
+    // Get verified sellers (public)
+    if (path === 'sellers/verified') {
+      const result = await pool.query(`
+        SELECT sp.*, u.name, u.email, u.phone_number
+        FROM seller_profiles sp
+        JOIN users u ON sp.user_id = u.id
+        WHERE sp.verified = true
+        ORDER BY sp.created_at DESC
+      `);
+
+      return NextResponse.json({ success: true, sellers: result.rows });
+    }
+
+    // Get seller store (public)
+    if (path.startsWith('seller-store/')) {
+      const sellerId = path.split('/')[1];
+      
+      // Get seller profile
+      const sellerResult = await pool.query(`
+        SELECT sp.*, u.name, u.email, u.phone_number
+        FROM seller_profiles sp
+        JOIN users u ON sp.user_id = u.id
+        WHERE sp.id = $1 AND sp.verified = true
+      `, [sellerId]);
+
+      if (sellerResult.rows.length === 0) {
+        return NextResponse.json({ error: 'Seller not found' }, { status: 404 });
+      }
+
+      const seller = sellerResult.rows[0];
+
+      // Get seller's items
+      const itemsResult = await pool.query(`
+        SELECT * FROM items 
+        WHERE owner_id = $1 AND status = 'listed'
+        ORDER BY created_at DESC
+      `, [seller.user_id]);
+
+      return NextResponse.json({ 
+        success: true, 
+        seller,
+        items: itemsResult.rows 
+      });
+    }
+
     // Get all items (public or filtered)
     if (path === 'items') {
       const { searchParams } = new URL(request.url);
