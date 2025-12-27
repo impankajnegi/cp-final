@@ -613,9 +613,9 @@ export async function POST(request) {
       }, { status: 201 });
     }
 
-    // Counter offer (owner)
+    // Counter offer (renter)
     if (path.startsWith('offers/') && path.endsWith('/counter')) {
-      const roleCheck = requireRole(user, ['owner', 'admin']);
+      const roleCheck = requireRole(user, ['renter', 'admin']);
       if (roleCheck) return NextResponse.json(roleCheck, { status: roleCheck.status });
 
       const offerId = path.split('/')[1];
