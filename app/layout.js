@@ -1,14 +1,23 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'Next.js MongoDB Template',
-  description: 'A simple template with App Router, MongoDB, and shadcn/ui',
+  title: 'Chaarpaisa - Multi-Role Marketplace',
+  description: 'Buy, sell, and rent items in your neighborhood. A comprehensive marketplace platform with owner, renter, seller, and admin roles.',
+  keywords: 'marketplace, rental, secondhand, buy, sell, rent, items, chaarpaisa',
+  openGraph: {
+    title: 'Chaarpaisa - Multi-Role Marketplace',
+    description: 'Buy, sell, and rent items in your neighborhood',
+    type: 'website',
+  }
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
+      <body className="antialiased">
         {children}
       </body>
     </html>
