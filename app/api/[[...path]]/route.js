@@ -832,8 +832,9 @@ export async function PUT(request) {
 
     // Update item status (owner/seller)
     if (path.startsWith('items/') && path.endsWith('/status')) {
-      const roleCheck = requireRole(user, ['owner', 'seller', 'admin']);
-      if (roleCheck) return NextResponse.json(roleCheck, { status: roleCheck.status });
+      if (!user) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      }
 
       const itemId = path.split('/')[1];
       const body = await request.json();
