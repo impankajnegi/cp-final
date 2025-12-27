@@ -517,10 +517,11 @@ export async function POST(request) {
       }, { status: 201 });
     }
 
-    // Create item (owner or seller)
+    // Create item (any authenticated user can list items)
     if (path === 'items') {
-      const roleCheck = requireRole(user, ['owner', 'seller', 'admin']);
-      if (roleCheck) return NextResponse.json(roleCheck, { status: roleCheck.status });
+      if (!user) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      }
 
       const formData = await request.formData();
       const name = formData.get('name');
