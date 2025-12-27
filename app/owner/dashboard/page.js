@@ -79,7 +79,7 @@ export default function OwnerDashboard() {
                   Back
                 </Button>
               </Link>
-              <h1 className="text-2xl font-bold">Owner Dashboard</h1>
+              <h1 className="text-2xl font-bold">My Items Dashboard</h1>
             </div>
             <Link href="/owner/add-item">
               <Button>
