@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Store, Mail, Lock, User, Phone, AlertCircle, X } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
@@ -18,8 +17,7 @@ export default function SignupPage() {
     email: '',
     password: '',
     confirmPassword: '',
-    phone_number: '',
-    role: 'renter'
+    phone_number: ''
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -48,7 +46,7 @@ export default function SignupPage() {
           email: formData.email,
           password: formData.password,
           phone_number: formData.phone_number,
-          role: formData.role
+          role: 'renter' // Default role for all users
         })
       });
 
@@ -85,7 +83,7 @@ export default function SignupPage() {
             <Store className="h-12 w-12 text-primary" />
           </div>
           <CardTitle className="text-3xl font-bold">Create Account</CardTitle>
-          <CardDescription>Join Chaarpaisa marketplace today</CardDescription>
+          <CardDescription>Join Chaarpaisa to rent items or list your own</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -141,19 +139,6 @@ export default function SignupPage() {
                   className="pl-10"
                 />
               </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="role">I want to</Label>
-              <Select value={formData.role} onValueChange={(value) => handleChange('role', value)}>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="renter">Browse & Rent Items</SelectItem>
-                  <SelectItem value="owner">List My Items</SelectItem>
-                </SelectContent>
-              </Select>
             </div>
 
             <div className="space-y-2">
