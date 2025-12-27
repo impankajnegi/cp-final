@@ -302,8 +302,8 @@ export default function HomePage() {
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                   <span className="text-2xl font-bold text-primary">1</span>
                 </div>
-                <h3 className="font-semibold mb-2">Sign Up as Owner</h3>
-                <p className="text-sm text-muted-foreground">Create your free owner account</p>
+                <h3 className="font-semibold mb-2">Sign Up</h3>
+                <p className="text-sm text-muted-foreground">Create your free account</p>
               </Card>
               <Card className="p-6">
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
@@ -320,9 +320,9 @@ export default function HomePage() {
                 <p className="text-sm text-muted-foreground">From verified sellers</p>
               </Card>
             </div>
-            <Link href="/signup?role=owner">
+            <Link href="/signup">
               <Button size="lg">
-                Sign Up as Owner
+                Sign Up to List Items
               </Button>
             </Link>
           </div>
