@@ -201,19 +201,6 @@ curl -X POST http://localhost:3000/api/signup \
   }'
 ```
 
-**Owner**
-```bash
-curl -X POST http://localhost:3000/api/signup \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "John Owner",
-    "email": "owner@test.com",
-    "password": "password123",
-    "role": "owner",
-    "phone_number": "9876543211"
-  }'
-```
-
 **Renter**
 ```bash
 curl -X POST http://localhost:3000/api/signup \
