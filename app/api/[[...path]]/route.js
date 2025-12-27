@@ -471,9 +471,9 @@ export async function POST(request) {
       }, { status: 201 });
     }
 
-    // Create item (owner)
+    // Create item (owner or seller)
     if (path === 'items') {
-      const roleCheck = requireRole(user, ['owner', 'admin']);
+      const roleCheck = requireRole(user, ['owner', 'seller', 'admin']);
       if (roleCheck) return NextResponse.json(roleCheck, { status: roleCheck.status });
 
       const formData = await request.formData();
