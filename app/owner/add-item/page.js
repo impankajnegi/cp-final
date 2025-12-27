@@ -199,6 +199,52 @@ export default function AddItemPage() {
                   />
                 </div>
 
+                <div className="border-t pt-6 mt-6">
+                  <h3 className="text-lg font-semibold mb-4">Rental Pricing (Optional)</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Set rental pricing if you want to offer this item for rent
+                  </p>
+                  
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="rental_price">Rental Price per Day (₹)</Label>
+                      <Input
+                        id="rental_price"
+                        type="number"
+                        placeholder="100"
+                        value={formData.rental_price_per_day}
+                        onChange={(e) => setFormData({ ...formData, rental_price_per_day: e.target.value })}
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="rental_days_min">Minimum Rental Days</Label>
+                        <Input
+                          id="rental_days_min"
+                          type="number"
+                          placeholder="1"
+                          min="1"
+                          value={formData.rental_days_min}
+                          onChange={(e) => setFormData({ ...formData, rental_days_min: e.target.value })}
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="rental_days_max">Maximum Rental Days</Label>
+                        <Input
+                          id="rental_days_max"
+                          type="number"
+                          placeholder="30"
+                          min="1"
+                          value={formData.rental_days_max}
+                          onChange={(e) => setFormData({ ...formData, rental_days_max: e.target.value })}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div className="space-y-2">
                   <Label htmlFor="images">Images</Label>
                   <div className="flex items-center gap-4">
