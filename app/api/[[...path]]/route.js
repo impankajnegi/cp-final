@@ -176,10 +176,11 @@ export async function GET(request) {
       return NextResponse.json({ success: true, item });
     }
 
-    // Get user's items (owner or seller)
+    // Get user's items (any authenticated user)
     if (path === 'my-items') {
-      const roleCheck = requireRole(user, ['owner', 'seller', 'admin']);
-      if (roleCheck) return NextResponse.json(roleCheck, { status: roleCheck.status });
+      if (!user) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      }
 
       const result = await pool.query(`
         SELECT * FROM items 
