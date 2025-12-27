@@ -782,9 +782,52 @@ export async function PUT(request) {
   try {
     const user = authenticate(request);
 
-    // Update item (owner)
+    // Update item status (owner/seller)
+    if (path.startsWith('items/') && path.endsWith('/status')) {
+      const roleCheck = requireRole(user, ['owner', 'seller', 'admin']);
+      if (roleCheck) return NextResponse.json(roleCheck, { status: roleCheck.status });
+
+      const itemId = path.split('/')[1];
+      const body = await request.json();
+      const { status } = body;
+
+      if (!status) {
+        return NextResponse.json({ 
+          error: 'Status is required' 
+        }, { status: 400 });
+      }
+
+      // Validate status values
+      const validStatuses = ['listed', 'accepted', 'locked', 'rented', 'sold', 'unavailable'];
+      if (!validStatuses.includes(status)) {
+        return NextResponse.json({ 
+          error: 'Invalid status' 
+        }, { status: 400 });
+      }
+
+      const result = await pool.query(
+        `UPDATE items 
+         SET status = $1, updated_at = CURRENT_TIMESTAMP
+         WHERE id = $2 AND owner_id = $3
+         RETURNING *`,
+        [status, itemId, user.id]
+      );
+
+      if (result.rows.length === 0) {
+        return NextResponse.json({ 
+          error: 'Item not found or unauthorized' 
+        }, { status: 404 });
+      }
+
+      return NextResponse.json({ 
+        success: true, 
+        item: result.rows[0] 
+      });
+    }
+
+    // Update item (owner/seller)
     if (path.startsWith('items/')) {
-      const roleCheck = requireRole(user, ['owner', 'admin']);
+      const roleCheck = requireRole(user, ['owner', 'seller', 'admin']);
       if (roleCheck) return NextResponse.json(roleCheck, { status: roleCheck.status });
 
       const itemId = path.split('/')[1];
