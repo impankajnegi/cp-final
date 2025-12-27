@@ -1,6 +1,6 @@
 // Seed script for Chaarpaisa database
-import pool from './lib/db.js';
-import { hashPassword } from './lib/auth.js';
+import pool from '../lib/db.js';
+import { hashPassword } from '../lib/auth.js';
 
 async function seed() {
   console.log('Starting database seed...');
