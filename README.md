@@ -5,9 +5,8 @@ A full-stack marketplace application built with Next.js, PostgreSQL, and modern 
 ## Features
 
 ### Multi-Role System
-- **Owner**: List items for rent, manage inventory, view revenue
-- **Renter**: Browse and search items, request rentals, make payments
-- **Seller**: Browse items, negotiate offers with owners, lock deals
+- **Renter**: Browse items, rent items, list their own items for others to rent
+- **Seller**: Verified businesses that help sell/rent items, negotiate offers
 - **Admin**: Manage users, approve sellers, monitor transactions
 
 ### Core Functionality
