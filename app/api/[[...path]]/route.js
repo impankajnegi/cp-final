@@ -932,10 +932,11 @@ export async function DELETE(request) {
   try {
     const user = authenticate(request);
 
-    // Delete item (owner)
+    // Delete item (any authenticated user for their own items)
     if (path.startsWith('items/')) {
-      const roleCheck = requireRole(user, ['owner', 'admin']);
-      if (roleCheck) return NextResponse.json(roleCheck, { status: roleCheck.status });
+      if (!user) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      }
 
       const itemId = path.split('/')[1];
 
