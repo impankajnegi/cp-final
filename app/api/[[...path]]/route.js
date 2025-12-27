@@ -874,10 +874,11 @@ export async function PUT(request) {
       });
     }
 
-    // Update item (owner/seller)
+    // Update item (any authenticated user for their own items)
     if (path.startsWith('items/')) {
-      const roleCheck = requireRole(user, ['owner', 'seller', 'admin']);
-      if (roleCheck) return NextResponse.json(roleCheck, { status: roleCheck.status });
+      if (!user) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      }
 
       const itemId = path.split('/')[1];
       const body = await request.json();
