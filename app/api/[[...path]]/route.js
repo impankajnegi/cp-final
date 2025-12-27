@@ -329,10 +329,11 @@ export async function GET(request) {
       return NextResponse.json({ success: true, sellers: result.rows });
     }
 
-    // Get revenue stats (owner)
+    // Get revenue stats (any authenticated user)
     if (path === 'revenue') {
-      const roleCheck = requireRole(user, ['owner', 'admin']);
-      if (roleCheck) return NextResponse.json(roleCheck, { status: roleCheck.status });
+      if (!user) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      }
 
       const result = await pool.query(`
         SELECT 
