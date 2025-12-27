@@ -142,11 +142,11 @@ The database is automatically initialized on first API call. Tables include:
 6. Manage offers from sellers
 
 ### Renter Flow
-1. Sign up with role "renter"
-2. Browse available items
-3. Search and filter by category, price, location
-4. View item details
-5. Request rentals (payment integration ready)
+1. Sign up (default role is renter)
+2. Browse and search items
+3. List your own items with rental pricing options
+4. Receive and manage offers from sellers
+5. Accept/counter offers
 
 ### Seller Flow
 1. Sign up with any role
