@@ -1,15 +1,13 @@
 // Seed script for Chaarpaisa database
-import pg from 'pg';
-import bcrypt from 'bcryptjs';
-
-const { Pool } = pg;
+const { Pool } = require('pg');
+const bcrypt = require('bcryptjs');
 
 const pool = new Pool({
-  host: 'localhost',
-  port: 5432,
-  database: 'chaarpaisa',
-  user: 'postgres',
-  password: 'postgres'
+  host: process.env.POSTGRES_HOST || 'localhost',
+  port: process.env.POSTGRES_PORT || 5432,
+  database: process.env.POSTGRES_DB || 'chaarpaisa',
+  user: process.env.POSTGRES_USER || 'postgres',
+  password: process.env.POSTGRES_PASSWORD || 'postgres'
 });
 
 function hashPassword(password) {
@@ -78,7 +76,6 @@ async function seed() {
       await pool.query(`
         INSERT INTO seller_profiles (user_id, store_name, store_description, categories, location, verified)
         VALUES ($1, $2, $3, $4, $5, $6)
-        ON CONFLICT DO NOTHING
       `, [sellerId, 'Bob\'s Electronics Store', 'We deal in all kinds of electronics and gadgets', ['Electronics', 'Tools'], 'Mumbai', true]);
 
       console.log('✅ Seller profile created');
@@ -97,6 +94,7 @@ async function seed() {
     console.error('❌ Error seeding database:', error);
   } finally {
     await pool.end();
+    process.exit(0);
   }
 }
 

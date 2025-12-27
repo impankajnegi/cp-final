@@ -4,20 +4,23 @@ services:
   # PostgreSQL Database
   postgres:
     image: postgres:15-alpine
-    container_name: chaarpaisa-db
+    container_name: chaarpaisa-postgres
+    restart: unless-stopped
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: chaarpaisa
+      PGDATA: /var/lib/postgresql/data/pgdata
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
+      interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 10s
     networks:
       - chaarpaisa-network
 
@@ -27,6 +30,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: chaarpaisa-app
+    restart: unless-stopped
     environment:
       - NODE_ENV=production
       - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/chaarpaisa
@@ -43,6 +47,7 @@ services:
       - TWILIO_PHONE_NUMBER=your_twilio_phone_number
       - DEV_OTP=123456
       - NEXT_PUBLIC_BASE_URL=http://localhost:3000
+      - CORS_ORIGINS=*
     ports:
       - "3000:3000"
     depends_on:
@@ -52,10 +57,11 @@ services:
       - ./public/uploads:/app/public/uploads
     networks:
       - chaarpaisa-network
-    restart: unless-stopped
+    command: sh -c "./docker-entrypoint.sh yarn start"
 
 volumes:
   postgres_data:
+    driver: local
 
 networks:
   chaarpaisa-network:
