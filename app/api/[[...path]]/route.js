@@ -131,9 +131,9 @@ export async function GET(request) {
       return NextResponse.json({ success: true, item });
     }
 
-    // Get user's items (owner only)
+    // Get user's items (owner or seller)
     if (path === 'my-items') {
-      const roleCheck = requireRole(user, ['owner', 'admin']);
+      const roleCheck = requireRole(user, ['owner', 'seller', 'admin']);
       if (roleCheck) return NextResponse.json(roleCheck, { status: roleCheck.status });
 
       const result = await pool.query(`
