@@ -657,9 +657,9 @@ export async function POST(request) {
       });
     }
 
-    // Accept offer (renter)
+    // Accept offer (appusers)
     if (path.startsWith('offers/') && path.endsWith('/accept')) {
-      const roleCheck = requireRole(user, ['renter', 'admin']);
+      const roleCheck = requireRole(user, ['appusers', 'admin']);
       if (roleCheck) return NextResponse.json(roleCheck, { status: roleCheck.status });
 
       const offerId = path.split('/')[1];
