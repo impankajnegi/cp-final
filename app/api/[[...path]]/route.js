@@ -98,7 +98,7 @@ export async function GET(request) {
       });
     }
 
-    // Get all items (public or filtered)
+    // Get all items (with filters)
     if (path === 'items') {
       const { searchParams } = new URL(request.url);
       const category = searchParams.get('category');
@@ -109,13 +109,37 @@ export async function GET(request) {
       const search = searchParams.get('search');
 
       let query = `
-        SELECT i.*, u.name as owner_name, u.phone_number as owner_phone
+        SELECT i.*, u.name as owner_name, u.phone_number as owner_phone, u.role as owner_role
         FROM items i
         JOIN users u ON i.owner_id = u.id
         WHERE i.status = $1
       `;
       const params = [status];
       let paramCount = 1;
+
+      // BUSINESS LOGIC: Implement visibility rules
+      // AppUsers can only see items listed by Sellers
+      // Sellers can only see items listed by AppUsers
+      // No direct appuser-to-appuser visibility
+      if (user) {
+        if (user.role === 'appusers') {
+          // AppUsers see only seller items
+          paramCount++;
+          query += ` AND u.role = $${paramCount}`;
+          params.push('seller');
+        } else if (user.role === 'seller') {
+          // Sellers see only appuser items
+          paramCount++;
+          query += ` AND u.role = $${paramCount}`;
+          params.push('appusers');
+        }
+        // Admin can see all items (no filter)
+      } else {
+        // Non-logged-in users see only seller items (public marketplace)
+        paramCount++;
+        query += ` AND u.role = $${paramCount}`;
+        params.push('seller');
+      }
 
       if (category) {
         paramCount++;
