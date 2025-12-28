@@ -11,12 +11,14 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { ArrowLeft, Upload, AlertCircle, CheckCircle } from 'lucide-react';
+import { MAIN_CATEGORIES, SUBCATEGORIES, CONDITIONS } from '@/lib/categories';
 
 export default function AddItemPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
     category: '',
+    subcategory: '',
     description: '',
     location: '',
     expected_price: '',
@@ -24,15 +26,17 @@ export default function AddItemPage() {
     rental_days_min: '1',
     rental_days_max: '',
     age: '',
-    condition: 'good'
+    condition: 'good',
+    stock_quantity: '1'
   });
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
-  const categories = ['Electronics', 'Furniture', 'Tools', 'Sports', 'Books', 'Clothing', 'Other'];
-  const conditions = ['new', 'like-new', 'good', 'fair', 'poor'];
+  const categories = MAIN_CATEGORIES;
+  const subcategories = formData.category ? SUBCATEGORIES[formData.category] || [] : [];
+  const conditions = CONDITIONS;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
