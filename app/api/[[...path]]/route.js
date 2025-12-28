@@ -396,7 +396,7 @@ export async function POST(request) {
         `INSERT INTO users (name, email, password_hash, role, phone_number) 
          VALUES ($1, $2, $3, $4, $5) 
          RETURNING id, name, email, role, phone_number, verified, created_at`,
-        [name, email, passwordHash, role || 'renter', phone_number]
+        [name, email, passwordHash, role || 'appusers', phone_number]
       );
 
       const newUser = result.rows[0];
