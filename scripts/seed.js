@@ -90,7 +90,17 @@ async function seed() {
         VALUES ($1, $2, $3, $4, $5, $6)
       `, [sellerId, 'Vikram Wedding Rentals', 'Premium wedding attire and accessories for rent. Serving customers since 2015.', ['Wedding'], 'Mumbai', true]);
 
-      console.log('✅ Seller profile created');
+      // Create seller inventory items (these will be visible to appusers)
+      await pool.query(`
+        INSERT INTO items (owner_id, name, category, subcategory, description, location, expected_price, rental_price_per_day, rental_days_min, rental_days_max, stock_quantity, available_quantity, age, condition, status)
+        VALUES 
+        ($1, 'Premium Wedding Sherwani Collection', 'Wedding', 'Groom Wear', 'Exclusive designer sherwani collection with multiple styles', 'Mumbai', 40000, 2000, 2, 7, 5, 5, 0, 'new', 'listed'),
+        ($1, 'Bridal Lehenga - Designer Collection', 'Wedding', 'Bridal Wear', 'Heavy embroidered designer lehengas in various colors', 'Mumbai', 60000, 3500, 3, 7, 3, 3, 0, 'new', 'listed'),
+        ($1, 'Riding Helmet - Full Face ISI', 'Riding Accessories', 'Helmets', 'ISI certified full face helmets, multiple sizes available', 'Mumbai', 4000, 150, 1, 30, 10, 10, 0, 'new', 'listed'),
+        ($1, 'Wedding Decoration Package', 'Wedding', 'Decorations', 'Complete wedding stage decoration with lights and flowers', 'Mumbai', 50000, 5000, 1, 3, 2, 2, 1, 'like-new', 'listed')
+      `, [sellerId]);
+
+      console.log('✅ Seller profile and inventory created');
     }
 
     console.log('\n🎉 Database seeded successfully!');
