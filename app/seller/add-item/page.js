@@ -131,7 +131,10 @@ export default function SellerAddItemPage() {
 
                 <div className="space-y-2">
                   <Label htmlFor="category">Category *</Label>
-                  <Select value={formData.category} onValueChange={(value) => setFormData({ ...formData, category: value })}>
+                  <Select 
+                    value={formData.category} 
+                    onValueChange={(value) => setFormData({ ...formData, category: value, subcategory: '' })}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="Select category" />
                     </SelectTrigger>
@@ -142,6 +145,25 @@ export default function SellerAddItemPage() {
                     </SelectContent>
                   </Select>
                 </div>
+
+                {formData.category && (
+                  <div className="space-y-2">
+                    <Label htmlFor="subcategory">Subcategory *</Label>
+                    <Select 
+                      value={formData.subcategory} 
+                      onValueChange={(value) => setFormData({ ...formData, subcategory: value })}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select subcategory" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {subcategories.map(subcat => (
+                          <SelectItem key={subcat} value={subcat}>{subcat}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
 
                 <div className="space-y-2">
                   <Label htmlFor="description">Description</Label>
