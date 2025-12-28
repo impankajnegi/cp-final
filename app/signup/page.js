@@ -46,7 +46,7 @@ export default function SignupPage() {
           email: formData.email,
           password: formData.password,
           phone_number: formData.phone_number,
-          role: 'renter' // Default role for all users
+          role: 'appusers' // Default role for all users
         })
       });
 
