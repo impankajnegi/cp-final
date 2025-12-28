@@ -149,8 +149,8 @@ export default function SellerDashboardPage() {
 
   const filteredItems = items
     .filter(item => {
-      if (filterCategory && item.category !== filterCategory) return false;
-      if (filterStatus && item.status !== filterStatus) return false;
+      if (filterCategory !== 'all' && item.category !== filterCategory) return false;
+      if (filterStatus !== 'all' && item.status !== filterStatus) return false;
       if (searchQuery && !item.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
       return true;
     })
