@@ -190,6 +190,21 @@ export default function AddItemPage() {
                   </div>
 
                   <div className="space-y-2">
+                    <Label htmlFor="stock">Stock Quantity *</Label>
+                    <Input
+                      id="stock"
+                      type="number"
+                      placeholder="1"
+                      min="1"
+                      value={formData.stock_quantity}
+                      onChange={(e) => setFormData({ ...formData, stock_quantity: e.target.value })}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
                     <Label htmlFor="age">Age (years)</Label>
                     <Input
                       id="age"
