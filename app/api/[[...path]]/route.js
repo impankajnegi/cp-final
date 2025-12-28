@@ -191,9 +191,9 @@ export async function GET(request) {
       return NextResponse.json({ success: true, items: result.rows });
     }
 
-    // Get offers for an item (renter only)
+    // Get offers for an item (appusers only)
     if (path.startsWith('items/') && path.includes('/offers')) {
-      const roleCheck = requireRole(user, ['renter', 'seller', 'admin']);
+      const roleCheck = requireRole(user, ['appusers', 'seller', 'admin']);
       if (roleCheck) return NextResponse.json(roleCheck, { status: roleCheck.status });
 
       const itemId = path.split('/')[1];
