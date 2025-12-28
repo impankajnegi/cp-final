@@ -201,15 +201,15 @@ curl -X POST http://localhost:3000/api/signup \
   }'
 ```
 
-**Renter**
+**App User**
 ```bash
 curl -X POST http://localhost:3000/api/signup \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Jane Renter",
-    "email": "renter@test.com",
+    "name": "John AppUser",
+    "email": "user1@test.com",
     "password": "password123",
-    "role": "renter",
+    "role": "appusers",
     "phone_number": "9876543212"
   }'
 ```
