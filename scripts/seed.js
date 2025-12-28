@@ -88,7 +88,6 @@ async function seed() {
       await pool.query(`
         INSERT INTO seller_profiles (user_id, store_name, store_description, categories, location, verified)
         VALUES ($1, $2, $3, $4, $5, $6)
-        ON CONFLICT (user_id) DO NOTHING
       `, [sellerId, 'Vikram Wedding Rentals', 'Premium wedding attire and accessories for rent. Serving customers since 2015.', ['Wedding'], 'Mumbai', true]);
 
       console.log('✅ Seller profile created');
