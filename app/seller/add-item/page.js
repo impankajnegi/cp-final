@@ -11,12 +11,14 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { ArrowLeft, Upload, AlertCircle, CheckCircle } from 'lucide-react';
+import { MAIN_CATEGORIES, SUBCATEGORIES, CONDITIONS } from '@/lib/categories';
 
 export default function SellerAddItemPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
     category: '',
+    subcategory: '',
     description: '',
     location: '',
     expected_price: '',
@@ -32,8 +34,9 @@ export default function SellerAddItemPage() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
-  const categories = ['Electronics', 'Furniture', 'Tools', 'Sports', 'Books', 'Clothing', 'Other'];
-  const conditions = ['new', 'like-new', 'good', 'fair', 'poor'];
+  const categories = MAIN_CATEGORIES;
+  const subcategories = formData.category ? SUBCATEGORIES[formData.category] || [] : [];
+  const conditions = CONDITIONS;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
