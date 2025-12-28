@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Search, MapPin, Store, ShoppingBag, User, LogOut, Plus, Package, Filter, Home, Box } from 'lucide-react';
+import { MAIN_CATEGORIES } from '@/lib/categories';
 
 export default function HomePage() {
   const router = useRouter();
@@ -22,7 +23,7 @@ export default function HomePage() {
   const [viewMode, setViewMode] = useState('renter'); // 'renter' or 'owner'
   const [groupBy, setGroupBy] = useState('sellers');
 
-  const categories = ['Electronics', 'Furniture', 'Tools', 'Sports', 'Books', 'Clothing', 'Other'];
+  const categories = MAIN_CATEGORIES;
   const locations = ['Bangalore', 'Mumbai', 'Delhi', 'Pune', 'Hyderabad', 'Chennai', 'Kolkata'];
 
   useEffect(() => {
