@@ -136,7 +136,7 @@ export default function ProfilePage() {
             </div>
 
             <div className="pt-4 space-y-3">
-              {user.role === 'renter' && (
+              {user.role === 'appusers' && (
                 <Link href="/owner/dashboard">
                   <Button className="w-full" variant="outline">
                     Go to My Items Dashboard
@@ -157,7 +157,7 @@ export default function ProfilePage() {
                   </Button>
                 </Link>
               )}
-              {user.role === 'renter' && (
+              {user.role === 'appusers' && (
                 <Link href="/">
                   <Button className="w-full" variant="outline">
                     Browse Marketplace
