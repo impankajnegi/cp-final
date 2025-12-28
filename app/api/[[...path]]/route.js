@@ -527,12 +527,14 @@ export async function POST(request) {
       const formData = await request.formData();
       const name = formData.get('name');
       const category = formData.get('category');
+      const subcategory = formData.get('subcategory');
       const description = formData.get('description');
       const location = formData.get('location');
       const expected_price = formData.get('expected_price');
       const rental_price_per_day = formData.get('rental_price_per_day');
       const rental_days_min = formData.get('rental_days_min');
       const rental_days_max = formData.get('rental_days_max');
+      const stock_quantity = formData.get('stock_quantity') || 1;
       const age = formData.get('age');
       const condition = formData.get('condition');
       
@@ -552,10 +554,10 @@ export async function POST(request) {
 
       const result = await pool.query(
         `INSERT INTO items 
-         (owner_id, name, category, description, location, expected_price, rental_price_per_day, rental_days_min, rental_days_max, age, condition, images) 
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) 
+         (owner_id, name, category, subcategory, description, location, expected_price, rental_price_per_day, rental_days_min, rental_days_max, stock_quantity, available_quantity, age, condition, images) 
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $11, $12, $13, $14) 
          RETURNING *`,
-        [user.id, name, category, description, location, expected_price, rental_price_per_day, rental_days_min, rental_days_max, age, condition, imageUrls]
+        [user.id, name, category, subcategory, description, location, expected_price, rental_price_per_day, rental_days_min, rental_days_max, stock_quantity, age, condition, imageUrls]
       );
 
       return NextResponse.json({ 
