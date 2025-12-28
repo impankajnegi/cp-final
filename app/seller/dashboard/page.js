@@ -359,13 +359,13 @@ export default function SellerDashboardPage() {
                   <Badge variant="secondary">
                     {filteredItems.length} of {items.length} items
                   </Badge>
-                  {(filterCategory || filterStatus || searchQuery) && (
+                  {(filterCategory !== 'all' || filterStatus !== 'all' || searchQuery) && (
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => {
-                        setFilterCategory('');
-                        setFilterStatus('');
+                        setFilterCategory('all');
+                        setFilterStatus('all');
                         setSearchQuery('');
                       }}
                     >
