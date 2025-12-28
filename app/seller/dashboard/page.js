@@ -315,7 +315,7 @@ export default function SellerDashboardPage() {
                         <SelectValue placeholder="All Categories" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">All Categories</SelectItem>
+                        <SelectItem value="all">All Categories</SelectItem>
                         {MAIN_CATEGORIES.map(cat => (
                           <SelectItem key={cat} value={cat}>{cat}</SelectItem>
                         ))}
@@ -330,7 +330,7 @@ export default function SellerDashboardPage() {
                         <SelectValue placeholder="All Status" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">All Status</SelectItem>
+                        <SelectItem value="all">All Status</SelectItem>
                         <SelectItem value="listed">Listed</SelectItem>
                         <SelectItem value="rented">Rented</SelectItem>
                         <SelectItem value="maintenance">Maintenance</SelectItem>
